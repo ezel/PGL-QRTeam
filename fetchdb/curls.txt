@@ -1,0 +1,5 @@
+pm pgl qr team
+
+curl 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamDetail'  -H 'Accept-Encoding: gzip, deflate, br' -H 'Referer: https://3ds.pokemon-gl.com/rentalteam/BT-D139-44CF' -H 'X-Requested-With: XMLHttpRequest' --data 'languageId=2&battleTeamCd=BT-D139-44CF&timeStamp=1504881361144' --compressed
+
+curl 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamUseTrainerRanking' -H 'Accept-Encoding: gzip, deflate, br' -H 'Referer: https://3ds.pokemon-gl.com/rentalteam/trainer/' -H 'X-Requested-With: XMLHttpRequest' --data 'timezone=Asia%2FTokyo&languageId=1&battleType=2&rankingType=1&displayNumber=10&page=1&timeStamp=1504881335388' --compressed%

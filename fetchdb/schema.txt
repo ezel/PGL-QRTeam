@@ -1,0 +1,63 @@
+RankingList:
+{
+    isLogin,
+    updateDateFrom,
+    updateDateTo,
+    status_code,
+    'battleTeamUseTrainerRankingInfo': [
+            ranking,
+            sequenceNumber,
+            publishFlg,
+            battleTeam: {
+                battleTeamCd,
+                battleTeamName,
+                message,
+                useCount,
+            },
+            trainer,
+    ],
+    timezoneName,
+    page,
+    totalCount
+}
+
+TeamDetail:
+{
+    status_code,
+    trainer: {
+        memberSavedataIdCode,
+        trainerName,
+        trainerNameRuby,
+        countryCode,
+        savedataId,
+        accountId,
+    },
+    pokemonList: [
+        monsno,
+        formNo,
+        name,
+        typeId1,
+        typeName1,
+        typeId2,
+        typeName2,
+        gender,
+        itemId,
+        itemName,
+        tokusei,
+        level,
+        waza1: {name, typeId, typeName},
+        waza2: {...},
+        waza3: {...},
+        waza4: {...},
+    ],
+    battleTeam: {
+        battleTeamCd,
+        battleTeamName,
+        battleType,
+        message,
+        winCount,
+        useCount,
+        battleVideoCd,
+        qrcodeMd5,
+    }
+}
