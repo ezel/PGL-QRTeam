@@ -25,7 +25,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 
-web/data/
+web/js/data.js
 *.egg
 
 # PyInstaller
