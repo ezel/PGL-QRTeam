@@ -26,15 +26,40 @@ def getRawJSON(page=1):
     res = requests.post(url, data=getPostData(page), headers=headers)
     return json.loads(res.text)
 
+def getTeamInfoFromRaw(rawPage):
+    rawInfoList = rawPage['battleTeamUseTrainerRankingInfo']
+    # filter the info
+    # no filter
+    return rawInfoList
+
 def getAllRankingInfo():
     page = 1
     raw = getRawJSON(page)
     results = []
+    totalCount = raw['totalCount']
     while(raw['totalCount'] > 0):
-        results.extend(raw['battleTeamUseTrainerRankingInfo'])
+        results.extend(getTeamInfoFromRaw(raw))
         page += 1
+        totalCount += raw['totalCount']
         raw = getRawJSON(page)
     return results
+
+def saveAllRankingInfoToFile(fpath="web/js/data.js"):
+    raw = getAllRankingInfo()
+    with open(fpath, 'a') as openfile:
+        openfile.write('rl=')
+        json.dump(raw, openfile)
+        openfile.write(';\ntd=[];\n')
+    return raw
+
+def retrieveTeamCdFromFile(fpath="web/js/data.js"):
+    with open(fpath) as rfile:
+        rline = rfile.readline()
+        try:
+            info = json.loads(rline[3:-2])
+        except json.decoder.JSONDecodeError:
+            info = json.loads(rline[3:])
+    return [i['battleTeam']['battleTeamCd'] for i in info]
 
 if __name__ == '__main__':
     pass

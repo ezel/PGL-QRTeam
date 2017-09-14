@@ -1,4 +1,7 @@
 import sys
+import os
+from crawl import RankingList as rl
+from crawl import TeamDetail as td
 
 def help():
     content = "The main\n" + \
@@ -16,6 +19,18 @@ def error(msg):
     print(msg)
     return
 
+def download_detail_from_rankfile(fpath):
+    teamCds = rl.retrieveTeamCdFromFile(fpath)
+    td.appendBatchTeamDetailToFile(teamCds)
+    pass
+
+def clean():
+    try:
+        os.remove('web/js/data.js')
+        print('data file cleaned.')
+    except OSError:
+        print('no data file!')
+
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
         help()
@@ -23,26 +38,25 @@ if __name__ == '__main__':
         if len(sys.argv) <= 3:
             error('usage: raw rpage|team ARGs')
         elif sys.argv[2] == 'rpage':
-            from crawl import RankingList as rl
             print(rl.getRawJSON(sys.argv[3]))
         elif sys.argv[2] == 'team':
-            from crawl import TeamDetail as td
             print(td.getRawJSON(sys.argv[3]))
         else:
             error('usage: raw rpage|team ARGs')
     elif sys.argv[1] == 'download':
-        if len(sys.argv) <= 3 or sys.argv[2] == 'all':
-            pass
+        if len(sys.argv) == 2 or sys.argv[2] == 'all':
+            rl.saveAllRankingInfoToFile()
+            download_detail_from_rankfile('web/js/data.js')
         elif sys.argv[2] == 'rank':
-            pass
+            rl.saveAllRankingInfoToFile()
         elif sys.argv[2] == 'detail':
             # read ranklist
-
-            pass
+            fpath = 'web/js/data.js'
+            download_detail_from_rankfile(fpath)
         else:
             error('usage: download rank|detail|all')
         pass
     elif sys.argv[1] == 'clean':
-        pass
+        clean()
     else:
         help()
