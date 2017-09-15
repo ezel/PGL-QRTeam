@@ -33,6 +33,8 @@ body, html {
 }
 .tbl-content tr:hover {
     background-color: #e64946;
+    color: honeydew;
+    font-weight: 200;
 }
 
 .tbl-content td{
@@ -79,6 +81,7 @@ td.prevTD {
 
 #secondary .tbl-header th {
     text-align: center;
+    font-size: 12px;
     width: 11.11%;
     padding: 12px;
 }
