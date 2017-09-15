@@ -24,6 +24,18 @@ function createA(text, href, className=false) {
   return a;
 }
 
+function transferGender(gender) {
+  switch(gender) {
+  case 0:
+    return 'M';
+  case 1:
+    return 'F';
+  case 2:
+  default:
+    return '';
+  }
+}
+
 function getPokemonIcon(pmID, formID=0) {
   var altnum = {
     25: 804 + 2,//pikachubelle

@@ -25,7 +25,7 @@ function initPrimary() {
         tbl1.children[j].style.backgroundColor = '';
 
       // choosed style
-      this.style.backgroundColor = 'red';
+      this.style.backgroundColor = '#e64946';
     });
     // init table1 with tr
     tbl1.appendChild(tr_node);
@@ -42,7 +42,7 @@ function updateSecondary(teamCd) {
   var tr_node, tr_contents, tr_class = ['idTD','pmTD','genderTD','abTD','itemTD','wzTD','wzTD','wzTD','wzTD'];
   for (var i=0;i<detail.pokemonList.length;i++) {
     var pm = detail.pokemonList[i];
-    tr_contents = [createPokemonIcon(pm.monsno, pm.formNo),pm.name, pm.gender, pm.tokusei, pm.itemName,
+    tr_contents = [createPokemonIcon(pm.monsno, pm.formNo),pm.name, transferGender(pm.gender), pm.tokusei, pm.itemName,
                    pm.waza1.name, pm.waza2.name, pm.waza3.name, pm.waza4.name];
     tr_node = createTr(tr_contents, tr_class);
     tbl2.appendChild(tr_node);
