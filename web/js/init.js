@@ -2,12 +2,16 @@ var rl, td;
 
 function initPrimary() {
   var tbl1 = document.getElementById('tbl1');
-  var tr_contents, tr_class = ['rankTD', 'nameTD', 'linkTD'];
+  var tr_contents, tr_class = ['rankTD', 'prevTD'];
   var tr_node;
   for (var i=0;i<rl.length;i++) {
     var teamCd = rl[i].battleTeam.battleTeamCd;
     // init tr_node
-    tr_contents = [rl[i].ranking, rl[i].battleTeam.battleTeamName, createA(teamCd,'https://3ds.pokemon-gl.com/rentalteam/'+teamCd)];
+    var team_prev = document.createElement('div');
+    for (var j=0;j<td[teamCd].pokemonList.length;j++) {
+      team_prev.appendChild(createPokemonIcon(td[teamCd].pokemonList[j].monsno, td[teamCd].pokemonList[j].formNo));
+    }
+    tr_contents = [rl[i].ranking, team_prev];
     tr_node = createTr(tr_contents, tr_class);
     //tr_node.setAttribute('teamCd', teamCd);
     tr_node.id = teamCd;

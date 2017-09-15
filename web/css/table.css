@@ -195,7 +195,7 @@ td.nameTD{
 span {
     width:40px;
     height:30px;
-    display:block;
+    display:inline-block;
 }
 
 /* follow me template */
