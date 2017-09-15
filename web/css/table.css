@@ -192,6 +192,11 @@ td.nameTD{
   width: 10%;
 }
 
+span {
+    width:40px;
+    height:30px;
+    display:block;
+}
 
 /* follow me template */
 .made-with-love {
