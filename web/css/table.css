@@ -31,7 +31,7 @@ body, html {
   overflow-x:auto;
   margin-top: 0px;
 }
-.tbl-content tr:hover {
+.tbl-body tr:hover {
     background-color: #e64946;
     color: honeydew;
     font-weight: 200;
@@ -101,6 +101,29 @@ td.itemTD {
 }
 td.wzTD {
     font-family:monospace;
+}
+#third {
+  min-width: 70%;
+  width: 70%;
+}
+#third table{
+  border: 2px solid black;
+}
+#third th {
+  text-align: center;
+  font-size: 12px;
+  padding: 12px;
+  font: bold 12px/18px sans-serif;
+  background-color: #1e3864;
+  color: #fff;
+  text-transform: uppercase;
+  border-right: 2px solid black;
+  overflow-x:auto;
+  margin-top: 0px;
+}
+#third td {
+  padding: 5px;
+  border-bottom: 1px solid black;
 }
 
 span {

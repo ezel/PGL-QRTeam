@@ -20,6 +20,7 @@ function initPrimary() {
     tr_node.addEventListener('click', function(){
       //console.log('clicked is:'+ this.className);
       updateSecondary(this.id);
+      updateThird(this.id);
       // clear all styles
       for (var j=0;j<tbl1.children.length;j++)
         tbl1.children[j].style.backgroundColor = '';
@@ -47,6 +48,19 @@ function updateSecondary(teamCd) {
     tr_node = createTr(tr_contents, tr_class);
     tbl2.appendChild(tr_node);
   }
+}
+
+function updateThird(teamCd) {
+  var tbl3 = document.getElementById('tbl3');
+  tbl3.innerHTML = "";
+
+  var detail = td[teamCd];
+  tbl3.appendChild(createTrWithTh(['Name', detail.battleTeam.battleTeamName]));
+  tbl3.appendChild(createTrWithTh(['Message', detail.battleTeam.message]));
+  tbl3.appendChild(createTrWithTh(['Usage', detail.battleTeam.winCount +' / ' + detail.battleTeam.useCount]));
+  tbl3.appendChild(createTrWithTh(['Trainer', detail.trainer.trainerName + ' (' + detail.trainer.trainerNameRuby + ')']));
+  tbl3.appendChild(createTrWithTh(['Country', detail.trainer.countryCode]));
+  tbl3.appendChild(createTrWithTh(['Link', createA(teamCd, 'https://3ds.pokemon-gl.com/rentalteam/'+teamCd)]));
 }
 
 initPrimary();

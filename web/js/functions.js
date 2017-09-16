@@ -1,4 +1,4 @@
-function createTd(text, className="") {
+function createTd(text, className=false) {
   var td = document.createElement('td');
   if (typeof(text) !== "object")
     td.textContent = text;
@@ -8,11 +8,25 @@ function createTd(text, className="") {
   return td;
 }
 
+function createTh(text, className=false) {
+  var th = document.createElement('th');
+  th.textContent = text;
+  if (className) th.className = className;
+  return th;
+}
+
 function createTr(textArray, classArray) {
   var tr = document.createElement('tr');
   for (var i=0;i<textArray.length;i++) {
     tr.appendChild(createTd(textArray[i], classArray[i]));
   }
+  return tr;
+}
+
+function createTrWithTh(textArray, classArray=[]) {
+  var tr = document.createElement('tr');
+  tr.appendChild(createTh(textArray[0], classArray[0]));
+  tr.appendChild(createTd(textArray[1], classArray[1]));
   return tr;
 }
 
