@@ -6,8 +6,9 @@ $ pip install -r requirements.txt
 ```
 
 ## Step
-#### 1.Download the data
+#### 1.(optional) Download the data
 ```bash
+$ python runner.py clean
 $ python runner.py download
 ```
 
