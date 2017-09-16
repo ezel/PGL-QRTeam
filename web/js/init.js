@@ -63,4 +63,29 @@ function updateThird(teamCd) {
   tbl3.appendChild(createTrWithTh(['Link', createA(teamCd, 'https://3ds.pokemon-gl.com/rentalteam/'+teamCd)]));
 }
 
+function filterTeamWithInput() {
+  var input, filter, table, tr, i;
+  input = document.getElementById("fInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("tbl1");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    var teamCd = rl[i].battleTeam.battleTeamCd;
+    if (rl[i]) {
+      if ((rl[i].trainer.trainerName.toUpperCase().indexOf(filter) > -1 ) ||
+          (rl[i].trainer.trainerNameRuby.toUpperCase().indexOf(filter) > -1 ) ||
+          (rl[i].trainer.countryCode.indexOf(filter) > -1 ) ||
+          (td[teamCd].pokemonList.map(function(l) { return l.name.toUpperCase();}).join().indexOf(filter) > -1) ||
+          (td[teamCd].pokemonList.map(function(l) { return l.name.replace(/ /g,"").toUpperCase();}).join().indexOf(filter) > -1)
+         ) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
 initPrimary();

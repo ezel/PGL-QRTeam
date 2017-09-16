@@ -52,7 +52,12 @@ body, html {
     padding: 10px;
   text-align: left;
 }
-
+#primary #fInput {
+  width: 100%; /* Full-width */
+  font-size: 12px; /* Increase font-size */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 4px; /* Add some space below the input */
+}
 #primary .tbl-header th {
     padding: 10px;
 }
