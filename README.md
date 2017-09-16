@@ -1,12 +1,13 @@
 # PGL-QRTeam
 This script fetch the QR team data from [PGL](https://3ds.pokemon-gl.com/) website, and display it in a simple offline web page.
 ## Requirement
+required only if you need download data from PGL on your own.
 ```sh
 $ pip install -r requirements.txt
 ```
 
 ## Step
-#### 1.(optional) Download the data
+#### 1.(Optional) Download the data
 ```bash
 $ python runner.py clean
 $ python runner.py download
