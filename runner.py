@@ -4,7 +4,7 @@ from crawl import RankingList as rl
 from crawl import TeamDetail as td
 
 def help():
-    content = "The main\n" + \
+    content = "The main script to download or clean the QR team data from PGL site.\n" + \
               "\tdownload\t download and save team data.\n" + \
               "\t        \t RANGE: rank|detail|all .\n" +\
               "\tclean   \t clean all the old data.\n" + \
