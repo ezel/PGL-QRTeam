@@ -52,6 +52,11 @@ body, html {
     padding: 10px;
   text-align: left;
 }
+#primary #fCheckbox {
+}
+#primary #fCheckbox div{
+  float: left;
+}
 #primary #fInput {
   width: 100%; /* Full-width */
   font-size: 12px; /* Increase font-size */
