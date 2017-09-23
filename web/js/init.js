@@ -1,19 +1,5 @@
 var rl, td;
 
-function initData() {
-  var removed = 0;
-  for (var i=0;i<rl.length;i++) {
-    var teamCd = rl[i].battleTeam.battleTeamCd;
-    if (td[teamCd].status_code !== "0000") {
-      rl.splice(i,1); // remove the closed qr team
-      console.log('removed: '+ teamCd);
-      removed +=1;
-      delete(td[teamCd]);
-    }
-  }
-  console.log('removed:'+removed+'from:'+i);
-}
-
 function initPrimary() {
   var tbl1 = document.getElementById('tbl1');
   var tr_contents, tr_class = ['rankTD', 'prevTD'];
@@ -105,7 +91,7 @@ function filterTeamWithInput() {
 function initCheckbox() {
   var result = [];
   // search rankinglist
-  for (var i=0;i<rl.length;i++) {
+  for (let i=0;i<rl.length;i++) {
     r = rl[i].ranking;
     sidx = r.indexOf("S");
     while (sidx>0) {
@@ -116,10 +102,31 @@ function initCheckbox() {
   }
   result.sort();
   createCheckbox(result);
+
+  // add event listener
+  var fcheckbox = document.getElementById('fCheckbox');
+  var inputs = fcheckbox.getElementsByTagName('input');
+  for (let i=0;i<inputs.length;i++) {
+    inputs[i].addEventListener('change', function(e) {
+      filterTeamWithCheckbox(this);
+    });
+  }
 }
 
-function filterTeamWithCheckbox() {
+function filterTeamWithCheckbox(that) {
+  console.log(getCheckboxValue());
+}
 
+function getCheckboxValue() {
+  var result = [];
+  var fcheckbox = document.getElementById('fCheckbox');
+  var inputs = fcheckbox.getElementsByTagName('input');
+  for (let i=0;i<inputs.length;i++) {
+    if (inputs[i].checked) {
+      result.push(inputs[i].value);
+    }
+  }
+  return result;
 }
 
 initCheckbox();
