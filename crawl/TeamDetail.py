@@ -33,7 +33,7 @@ def appendBatchTeamDetailToFile(teamCds, fpath='web/js/data.js'):
     result = []
     IDCount = 1
     for teamCd in teamCds:
-        print('fetching team[%i]: %s ...\n' % (IDCount, teamCd))
+        print('fetching team[%i]: %s ...' % (IDCount, teamCd))
         raw = getRawJSON(teamCd)
         IDCount += 1
         result.append(raw)
