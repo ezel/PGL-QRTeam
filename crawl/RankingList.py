@@ -1,24 +1,25 @@
 import requests
 import json
 
-url = 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamUseTrainerRanking'
+#url = 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamUseTrainerRanking'
+url = 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamRanking'
 url_season = 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamSeasonRanking'
 
 headers = {
     'Accept-Encoding': 'gzip, deflate, compress, br',
-    'Referer': 'https://3ds.pokemon-gl.com/rentalteam/trainer/',
+    'Referer': 'https://3ds.pokemon-gl.com/rentalteam/',
     'X-Requested-With': 'XMLHttpRequest'
     }
 
 def getPostData(page=1, rankingType=1, seasonId=False):
     requestDataList = {
-        'timezone' : 'Asia&Tokyo',
+        'timezone' : 'JDT',
         'languageId' : '2',
         'battleType' : '2',
         'rankingType' : rankingType,  # 1:all, 2:season, 3:week, 4:day;
         'displayNumber' : '10',
         'page' : page,
-        'timeStamp' : '1504881335388',
+        'timeStamp' : '1506144598941',
     }
     if (seasonId):
         requestDataList['seasonId'] = seasonId;
@@ -37,16 +38,16 @@ def getTeamInfoFromRaw(rawPage, rankingType=1, seasonId=False):
     prefix_append = 0
     # set prefix
     if rankingType == 1:
-        rawInfoList = rawPage['battleTeamUseTrainerRankingInfo']
+        rawInfoList = rawPage['battleTeamRankingInfo']
         prefix_append = 'A.'
     elif rankingType == 2:
         rawInfoList = rawPage['battleTeamSeasonRankingInfo']
         prefix_append = 'S' + str(seasonId)[-1] + '.'
     elif rankingType == 3:
-        rawInfoList = rawPage['battleTeamUseTrainerRankingInfo']
+        rawInfoList = rawPage['battleTeamRankingInfo']
         prefix_append = 'W.'
     elif rankingType == 4:
-        rawInfoList = rawPage['battleTeamUseTrainerRankingInfo']
+        rawInfoList = rawPage['battleTeamRankingInfo']
         prefix_append = 'D.'
 
     # filter the info
@@ -77,7 +78,7 @@ def getAllRankingInfoList():
         if i == 2:
             # for season ranking , add season id (201-20x)
             for j in range(201, 207):
-                print('fetching ... season %i ...' % j )
+                print('  fetching ... season %i ...' % j )
                 info = getTotalRankingInfo(i, j)
                 all_info.append(info)
         else:

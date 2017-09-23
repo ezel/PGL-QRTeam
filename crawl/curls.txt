@@ -4,12 +4,18 @@ curl 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamDetail'  -H
 
 curl 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamUseTrainerRanking' -H 'Accept-Encoding: gzip, deflate, br' -H 'Referer: https://3ds.pokemon-gl.com/rentalteam/trainer/' -H 'X-Requested-With: XMLHttpRequest' --data 'timezone=Asia%2FTokyo&languageId=1&battleType=2&rankingType=1&displayNumber=10&page=1&timeStamp=1504881335388' --compressed
 
-curl 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamSeasonRanking' -H 'Accept-Encoding: gzip, deflate, br'  -H 'Referer: https://3ds.pokemon-gl.com/rentalteam/use/' -H 'X-Requested-With: XMLHttpRequest' --data 'timezone=Asia%2FTokyo&languageId=1&battleType=2&rankingType=2&displayNumber=5&page=1&seasonId=206&timeStamp=1505575634274' --compressed
+curl 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamRanking' -H 'Accept-Encoding: gzip, deflate, br' -H 'Referer: https://3ds.pokemon-gl.com/rentalteam/use/' -H 'X-Requested-With: XMLHttpRequest' --data 'timezone=JDT&languageId=2&battleType=2&rankingType=1&displayNumber=5&page=1&timeStamp=1506144598941' --compressed
 
 seasonID=206 - 201
+
+curl 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamSeasonRanking' -H 'Accept-Encoding: gzip, deflate, br'  -H 'Referer: https://3ds.pokemon-gl.com/rentalteam/use/' -H 'X-Requested-With: XMLHttpRequest' --data 'timezone=Asia%2FTokyo&languageId=1&battleType=2&rankingType=2&displayNumber=5&page=1&seasonId=206&timeStamp=1505575634274' --compressed
 
 weekly
 rankingType 3
 
+curl 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamRanking' -H 'Origin: https://3ds.pokemon-gl.com' -H 'Accept-Encoding: gzip, deflate, br' -H 'Referer: https://3ds.pokemon-gl.com/rentalteam/use/' -H 'X-Requested-With: XMLHttpRequest' -H 'Connection: keep-alive' --data 'timezone=JDT&languageId=2&battleType=2&rankingType=1&displayNumber=5&page=1&savedataId=7da4b500-b1fc-11e6-890f-0ac780a16845&timeStamp=1506139260343' --compressed
+
 daily
 rankingType 4
+
+curl 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamRanking' -H 'Accept-Encoding: gzip, deflate, br'  -H 'Referer: https://3ds.pokemon-gl.com/rentalteam/use/' -H 'X-Requested-With: XMLHttpRequest' -H 'Connection: keep-alive' --data 'timezone=JDT&languageId=2&battleType=2&rankingType=4&displayNumber=5&page=1&savedataId=7da4b500-b1fc-11e6-890f-0ac780a16845&timeStamp=1506139255546' --compressed
