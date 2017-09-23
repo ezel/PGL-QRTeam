@@ -47,7 +47,7 @@ body, html {
 /* left table */
 #primary {
     float: left;
-    width: 24%;
+    width: 23%;
     height: 100%;
     padding: 10px;
   text-align: left;
@@ -64,9 +64,13 @@ body, html {
   margin-bottom: 4px; /* Add some space below the input */
 }
 #primary .tbl-header th {
-    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    padding: 12px;
 }
-
+#primary .tbl-header th.prevTD, th.typeTD {
+  width: 45%;
+}
 #primary .tbl-content {
   max-height: 95%;
 }
@@ -78,11 +82,8 @@ body, html {
 td.rankTD {
   width: 5%;
 }
-td.prevTD div{
-  width: 45%;
-}
-td.typeTD {
-  width: 45%;
+td.prevTD, td.typeTD {
+  width: 40%;
 }
 
 /* right table */
@@ -140,10 +141,20 @@ td.wzTD {
 }
 
 span {
-    width:40px;
     height:30px;
-    display:inline-block;
+    display:inline-grid;
 }
+span.pokemonIcon, span.typeIcon {
+    width:40px;
+}
+span.typeIcon {
+  border: inset 1px black;
+}
+span.typeIconInner {
+    width:40px;
+    height:15px;
+}
+.typeNone{background-color:transparent}.typeNormal{background-color:#B2AC8C}.typeFighting{background-color:#934538}.typeFire{background-color:#F45C19}.typeIce{background-color:#4CACC2}.typeElectric{background-color:#EAA317}.typeFlying{background-color:#7E9ECF}.typeGrass{background-color:#04A641}.typeGround{background-color:#967344}.typePoison{background-color:#8F5B98}.typeBug{background-color:#989001}.typeDark{background-color:#7A0049}.typeWater{background-color:#4392D5}.typePsychic{background-color:#D7738D}.typeDragon{background-color:#625EB3}.typeRock{background-color:#878052}.typeGhost{background-color:#5563A4}.typeSteel{background-color:#999}.typeFairy{background-color:#FBF}
 
 .footer {
     clear: both;

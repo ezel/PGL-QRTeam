@@ -54,6 +54,14 @@ function createTdForTeamPreview(teamCd) {
   return div;
 }
 
+function createTdForTypePreview(teamCd) {
+  var div = document.createElement('div');
+  for (var j=0;j<td[teamCd].pokemonList.length;j++) {
+    div.appendChild(createTypeIcon(td[teamCd].pokemonList[j].typeId1, td[teamCd].pokemonList[j].typeId2));
+  }
+  return div;
+}
+
 function createCheckbox(seasonLArray=[1,2,3]) {
   var schkb = document.getElementById("seasons");
   for (var i=0; i<seasonLArray.length; i++) {
@@ -187,5 +195,48 @@ function getPokemonIcon(pmID, formID=0) {
 function createPokemonIcon(pmID, formID) {
   var span = document.createElement('span');
   span.style = getPokemonIcon(pmID, formID);
+  span.className = 'pokemonIcon';
   return span;
+}
+
+function getTypeIcon(typeId) {
+  var typeCharts = {
+    0 : 'typeNone',
+    1 : 'typeNormal',
+    2 : 'typeFighting',
+    3 : 'typeFire',
+    4 : 'typeIce',
+    5 : 'typeElectric',
+    6 : 'typeFlying',
+    7 : 'typeGrass',
+    8 : 'typeGround',
+    9 : 'typePoison',
+    10 : 'typeBug',
+    11 : 'typeDark',
+    12 : 'typeWater',
+    13 : 'typePsychic',
+    14 : 'typeDragon',
+    15 : 'typeRock',
+    16 : 'typeGhost',
+    17 : 'typeSteel',
+    18 : 'typeFairy'
+  };
+  return typeCharts[typeId];
+}
+
+function createTypeIcon(typeId1, typeId2) {
+  var spanA = document.createElement('span');
+  spanA.className = 'typeIcon';
+  var spanL = document.createElement('span');
+  var spanR = document.createElement('span');
+  spanL.className = 'typeIconInner typeLeft '+ getTypeIcon(typeId1);
+  spanR.className = 'typeIconInner typeRight ';
+  if (typeId2 > 0) {
+    spanR.className += getTypeIcon(typeId2);
+  } else {
+    spanR.className += getTypeIcon(typeId1);
+  }
+  spanA.appendChild(spanL);
+  spanA.appendChild(spanR);
+  return spanA;
 }

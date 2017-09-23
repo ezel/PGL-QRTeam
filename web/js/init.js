@@ -2,13 +2,14 @@ var rl, td;
 
 function initPrimary() {
   var tbl1 = document.getElementById('tbl1');
-  var tr_contents, tr_class = ['rankTD', 'prevTD'];
+  var tr_contents, tr_class = ['rankTD', 'prevTD', 'typeTD'];
   var tr_node;
   for (var i=0;i<rl.length;i++) {
     var teamCd = rl[i].battleTeam.battleTeamCd;
     // init tr_node
     let team_prev = createTdForTeamPreview(teamCd);
-    tr_contents = [createTdForRanking(rl[i].ranking), team_prev];
+    let type_prev = createTdForTypePreview(teamCd);
+    tr_contents = [createTdForRanking(rl[i].ranking), team_prev, type_prev];
     tr_node = createTr(tr_contents, tr_class);
     //tr_node.setAttribute('teamCd', teamCd);
     tr_node.id = i;
