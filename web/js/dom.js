@@ -76,6 +76,7 @@ function createCheckbox(seasonLArray=[1,2,3]) {
     slabel.textContent = "Season " + seasonLArray[i];
     seasons.appendChild(sbox);
     seasons.appendChild(slabel);
+    if (i%2) seasons.appendChild(document.createElement('br'));
   }
 }
 
