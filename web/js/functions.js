@@ -38,6 +38,22 @@ function createA(text, href, className=false) {
   return a;
 }
 
+function createCheckbox(seasonLArray=[1,2,3]) {
+  var schkb = document.getElementById("seasons");
+  for (var i=0; i<seasonLArray.length; i++) {
+    sbox = document.createElement('input');
+    sbox.type = "checkbox";
+    sbox.checked = true;
+    sbox.id = "s" + seasonLArray[i];
+    sbox.name = "interest";
+    sbox.value = sbox.id;
+    slabel = document.createElement('label');
+    slabel.htmlFor = sbox.id;
+    slabel.textContent = "Season " + seasonLArray[i];
+    seasons.appendChild(sbox);
+    seasons.appendChild(slabel);
+  }
+}
 function transferGender(gender) {
   switch(gender) {
   case 0:

@@ -1,5 +1,19 @@
 var rl, td;
 
+function initData() {
+  var removed = 0;
+  for (var i=0;i<rl.length;i++) {
+    var teamCd = rl[i].battleTeam.battleTeamCd;
+    if (td[teamCd].status_code !== "0000") {
+      rl.splice(i,1); // remove the closed qr team
+      console.log('removed: '+ teamCd);
+      removed +=1;
+      delete(td[teamCd]);
+    }
+  }
+  console.log('removed:'+removed+'from:'+i);
+}
+
 function initPrimary() {
   var tbl1 = document.getElementById('tbl1');
   var tr_contents, tr_class = ['rankTD', 'prevTD'];
@@ -11,7 +25,7 @@ function initPrimary() {
     for (var j=0;j<td[teamCd].pokemonList.length;j++) {
       team_prev.appendChild(createPokemonIcon(td[teamCd].pokemonList[j].monsno, td[teamCd].pokemonList[j].formNo));
     }
-    tr_contents = [rl[i].ranking, team_prev];
+    tr_contents = [rl[i].ranking.split(',')[0], team_prev];
     tr_node = createTr(tr_contents, tr_class);
     //tr_node.setAttribute('teamCd', teamCd);
     tr_node.id = teamCd;
@@ -88,4 +102,25 @@ function filterTeamWithInput() {
   }
 }
 
+function initCheckbox() {
+  var result = [];
+  // search rankinglist
+  for (var i=0;i<rl.length;i++) {
+    r = rl[i].ranking;
+    sidx = r.indexOf("S");
+    while (sidx>0) {
+      sid = parseInt(r.substr(sidx+1, r.indexOf(".",sidx)-sidx));
+      if (result.indexOf(sid)<0) result.push(sid);
+      sidx = r.indexOf("S", sidx+1);
+    }
+  }
+  result.sort();
+  createCheckbox(result);
+}
+
+function filterTeamWithCheckbox() {
+
+}
+
+initCheckbox();
 initPrimary();
