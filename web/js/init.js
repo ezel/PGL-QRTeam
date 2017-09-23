@@ -11,7 +11,7 @@ function initPrimary() {
     for (var j=0;j<td[teamCd].pokemonList.length;j++) {
       team_prev.appendChild(createPokemonIcon(td[teamCd].pokemonList[j].monsno, td[teamCd].pokemonList[j].formNo));
     }
-    tr_contents = [rl[i].ranking.split(',')[0], team_prev];
+    tr_contents = [rl[i].ranking, team_prev];
     tr_node = createTr(tr_contents, tr_class);
     //tr_node.setAttribute('teamCd', teamCd);
     tr_node.id = teamCd;
@@ -64,21 +64,23 @@ function updateThird(teamCd) {
 }
 
 function filterTeamWithInput() {
-  var input, filter, table, tr, i;
+  var input, filter, table, tr;
   input = document.getElementById("fInput");
   filter = input.value.toUpperCase();
   table = document.getElementById("tbl1");
   tr = table.getElementsByTagName("tr");
 
   // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
+  for (let i = 0; i < tr.length; i++) {
     var teamCd = rl[i].battleTeam.battleTeamCd;
     if (rl[i]) {
-      if ((rl[i].trainer.trainerName.toUpperCase().indexOf(filter) > -1 ) ||
-          (rl[i].trainer.trainerNameRuby.toUpperCase().indexOf(filter) > -1 ) ||
-          (rl[i].trainer.countryCode.indexOf(filter) > -1 ) ||
-          (td[teamCd].pokemonList.map(function(l) { return l.name.toUpperCase();}).join().indexOf(filter) > -1) ||
-          (td[teamCd].pokemonList.map(function(l) { return l.name.replace(/ /g,"").toUpperCase();}).join().indexOf(filter) > -1)
+      if ((matchCheckbox(rl[i].ranking)) &&
+          ((rl[i].trainer.trainerName.toUpperCase().indexOf(filter) > -1 ) ||
+           (rl[i].trainer.trainerNameRuby.toUpperCase().indexOf(filter) > -1 ) ||
+           (rl[i].trainer.countryCode.indexOf(filter) > -1 ) ||
+           (td[teamCd].pokemonList.map(function(l) { return l.name.toUpperCase();}).join().indexOf(filter) > -1) ||
+           (td[teamCd].pokemonList.map(function(l) { return l.name.replace(/ /g,"").toUpperCase();}).join().indexOf(filter) > -1)
+          )
          ) {
         tr[i].style.display = "";
       } else {
@@ -92,10 +94,10 @@ function initCheckbox() {
   var result = [];
   // search rankinglist
   for (let i=0;i<rl.length;i++) {
-    r = rl[i].ranking;
-    sidx = r.indexOf("S");
+    let r = rl[i].ranking;
+    let sidx = r.indexOf("S");
     while (sidx>0) {
-      sid = parseInt(r.substr(sidx+1, r.indexOf(".",sidx)-sidx));
+      let sid = parseInt(r.substr(sidx+1, r.indexOf(".",sidx)-sidx));
       if (result.indexOf(sid)<0) result.push(sid);
       sidx = r.indexOf("S", sidx+1);
     }
@@ -108,13 +110,24 @@ function initCheckbox() {
   var inputs = fcheckbox.getElementsByTagName('input');
   for (let i=0;i<inputs.length;i++) {
     inputs[i].addEventListener('change', function(e) {
-      filterTeamWithCheckbox(this);
+      filterTeamWithInput();
     });
   }
 }
 
-function filterTeamWithCheckbox(that) {
-  console.log(getCheckboxValue());
+function matchCheckbox(ranking) {
+  var filters = getCheckboxValue();
+  // no interests
+  if (filters.length==0) {
+    return false;
+  }
+  // compare 2 array
+  for(let j=0;j<filters.length;j++) {
+    if (ranking.indexOf(filters[j]) > -1 ) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function getCheckboxValue() {
