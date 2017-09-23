@@ -45,6 +45,7 @@ if __name__ == '__main__':
             error('usage: raw rpage|team ARGs')
     elif sys.argv[1] == 'download':
         if len(sys.argv) == 2 or sys.argv[2] == 'all':
+            clean()
             rl.saveAllRankingInfoToFile()
             download_detail_from_rankfile('web/js/data.js')
         elif sys.argv[2] == 'rank':

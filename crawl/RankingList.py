@@ -51,6 +51,9 @@ def getTeamInfoFromRaw(rawPage, rankingType=1, seasonId=False):
         prefix_append = 'D.'
 
     # filter the info
+    # remove -1 publish
+    rawInfoList = [x for x in rawInfoList if x['publishFlg'] == 1]
+
     for item in rawInfoList:
         # add A/S/W/D on ranking
         item['ranking'] = prefix_append + str(item['ranking'])
