@@ -54,6 +54,7 @@ function createCheckbox(seasonLArray=[1,2,3]) {
     seasons.appendChild(slabel);
   }
 }
+
 function transferGender(gender) {
   switch(gender) {
   case 0:
