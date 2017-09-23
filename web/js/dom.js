@@ -38,6 +38,22 @@ function createA(text, href, className=false) {
   return a;
 }
 
+function createTdForRanking(rankingStr) {
+  var div = document.createElement('div');
+  // for each ranking
+  var rankingHTML = rankingStr.replace(/,/g, '<br/>');
+  div.innerHTML = rankingHTML;
+  return div;
+}
+
+function createTdForTeamPreview(teamCd) {
+  var div = document.createElement('div');
+  for (var j=0;j<td[teamCd].pokemonList.length;j++) {
+    div.appendChild(createPokemonIcon(td[teamCd].pokemonList[j].monsno, td[teamCd].pokemonList[j].formNo));
+  }
+  return div;
+}
+
 function createCheckbox(seasonLArray=[1,2,3]) {
   var schkb = document.getElementById("seasons");
   for (var i=0; i<seasonLArray.length; i++) {

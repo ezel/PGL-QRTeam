@@ -7,14 +7,11 @@ function initPrimary() {
   for (var i=0;i<rl.length;i++) {
     var teamCd = rl[i].battleTeam.battleTeamCd;
     // init tr_node
-    var team_prev = document.createElement('div');
-    for (var j=0;j<td[teamCd].pokemonList.length;j++) {
-      team_prev.appendChild(createPokemonIcon(td[teamCd].pokemonList[j].monsno, td[teamCd].pokemonList[j].formNo));
-    }
-    tr_contents = [rl[i].ranking, team_prev];
+    let team_prev = createTdForTeamPreview(teamCd);
+    tr_contents = [createTdForRanking(rl[i].ranking), team_prev];
     tr_node = createTr(tr_contents, tr_class);
     //tr_node.setAttribute('teamCd', teamCd);
-    tr_node.id = teamCd;
+    tr_node.id = i;
 
     // event listen
     tr_node.addEventListener('click', function(){
@@ -33,8 +30,9 @@ function initPrimary() {
   }
 }
 
-function updateSecondary(teamCd) {
+function updateSecondary(rlId) {
   var tbl2 = document.getElementById('tbl2');
+  var teamCd = rl[rlId].battleTeam.battleTeamCd;
   // clear tbl2
   // other way: can use replaceChild to keep <thead>
   tbl2.innerHTML = "";
@@ -50,11 +48,12 @@ function updateSecondary(teamCd) {
   }
 }
 
-function updateThird(teamCd) {
+function updateThird(rlId) {
   var tbl3 = document.getElementById('tbl3');
   tbl3.innerHTML = "";
-
+  var teamCd = rl[rlId].battleTeam.battleTeamCd;
   var detail = td[teamCd];
+  tbl3.appendChild(createTrWithTh(['Rank', rl[rlId].ranking.replace(/,/g, '  ')]));
   tbl3.appendChild(createTrWithTh(['Name', detail.battleTeam.battleTeamName]));
   tbl3.appendChild(createTrWithTh(['Message', detail.battleTeam.message]));
   tbl3.appendChild(createTrWithTh(['Usage', detail.battleTeam.winCount +' / ' + detail.battleTeam.useCount]));
