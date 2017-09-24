@@ -1,6 +1,6 @@
 function createTd(text, className=false) {
   var td = document.createElement('td');
-  if (typeof(text) !== "object")
+  if ((typeof(text) !== "object") || (text === null))
     td.textContent = text;
   else
     td.appendChild(text);
