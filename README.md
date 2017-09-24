@@ -1,5 +1,8 @@
 # PGL-QRTeam
 This script fetch the QR team data from [PGL](https://3ds.pokemon-gl.com/) website, and display it in a simple offline web page.
+
+##[-> Demo on github <-](https://ezel.github.io/PGL-QRTeam/web/index.html)
+
 ## Requirement
 required only if you need download data from PGL on your own.
 ```sh
