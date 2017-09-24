@@ -117,7 +117,7 @@ def saveAllRankingInfoToFile(fpath="web/js/data-rank.js"):
     with open(fpath, 'a') as openfile:
         openfile.write('rl=')
         json.dump(infos, openfile)
-        openfile.write(';\ntd=[];\n')
+        openfile.write(';\n')
     return infos
 
 def retrieveTeamCdFromFile(fpath="web/js/data-rank.js"):

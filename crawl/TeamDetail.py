@@ -1,5 +1,6 @@
 import requests
 import json
+from os.path import isfile
 
 url = 'https://3ds.pokemon-gl.com/frontendApi/battleTeam/getBattleTeamDetail'
 
@@ -21,8 +22,28 @@ def getRawJSON(teamCd):
     res = requests.post(url, data=getPostData(teamCd), headers=headers)
     return json.loads(res.text)
 
+def checkFile(fpath='web/js/data-team.js'):
+    if isfile(fpath):
+        pass
+    else:
+        with open(fpath, 'w') as openfile:
+            openfile.write('var td=[];\n')
+
+def retrieveCurrentTeamCdFromFile(fpath="web/js/data-team.js"):
+    results = []
+    checkFile()
+    with open(fpath) as rfile:
+        rline = rfile.readline()
+        while(rline):
+            teamCd = rline[rline.find('[')+1:rline.find(']')].replace('"','');
+            if len(teamCd) > 10 and len(teamCd) < 15:
+                results.append(teamCd)
+            rline = rfile.readline()
+    return results
+
 def appendTeamDetailToFile(teamCd, fpath='web/js/data-team.js'):
     raw = getRawJSON(teamCd)
+    checkFile(fpath)
     with open(fpath, 'a') as openfile:
         openfile.write('td["%s"]=' % teamCd)
         json.dump(raw, openfile)
@@ -38,6 +59,7 @@ def appendBatchTeamDetailToFile(teamCds, fpath='web/js/data-team.js'):
         IDCount += 1
         result.append(raw)
 
+    checkFile(fpath)
     with open(fpath,'a') as openfile:
         for i in range(len(result)):
             openfile.write('td["%s"]=' % teamCds[i])

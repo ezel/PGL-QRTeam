@@ -1,7 +1,6 @@
 import sys
 import os
-from crawl import RankingList as rl
-from crawl import TeamDetail as td
+from crawl import RankingList as rl, TeamDetail as td
 
 def help():
     content = "The main script to download or clean the QR team data from PGL site.\n" + \
@@ -17,9 +16,11 @@ def error(msg):
     print(msg)
     return
 
-def download_detail_from_rankfile(fpath):
-    teamCds = rl.retrieveTeamCdFromFile(fpath)
-    td.appendBatchTeamDetailToFile(teamCds, 'web/js/data-team.js')
+def download_detail_by_rankfile(fpath, teampath='web/js/data-team.js'):
+    want_teamCds = rl.retrieveTeamCdFromFile(fpath)
+    old = td.retrieveCurrentTeamCdFromFile(teampath)
+    new = [x for x in want_teamCds if x not in old ]
+    td.appendBatchTeamDetailToFile(new, teampath)
 
 def clean(fpathArray=['web/js/data-rank.js','web/js/data-team.js']):
     for fpath in fpathArray:
@@ -34,15 +35,16 @@ if __name__ == '__main__':
         help()
     elif sys.argv[1] == 'download':
         if len(sys.argv) == 2 or sys.argv[2] == 'all':
-            clean()
+            clean(['web/js/data-rank.js'])
             rl.saveAllRankingInfoToFile()
             download_detail_from_rankfile('web/js/data-rank.js')
         elif sys.argv[2] == 'rank':
+            clean(['web/js/data-rank.js'])
             rl.saveAllRankingInfoToFile()
         elif sys.argv[2] == 'detail':
             # read ranklist
             fpath = 'web/js/data-rank.js'
-            download_detail_from_rankfile(fpath)
+            download_detail_by_rankfile(fpath)
         else:
             error('usage: download rank|detail|all')
         pass
