@@ -21,15 +21,15 @@ def error(msg):
 
 def download_detail_from_rankfile(fpath):
     teamCds = rl.retrieveTeamCdFromFile(fpath)
-    td.appendBatchTeamDetailToFile(teamCds)
-    pass
+    td.appendBatchTeamDetailToFile(teamCds, 'web/js/data-team.js')
 
-def clean():
-    try:
-        os.remove('web/js/data.js')
-        print('data file cleaned.')
-    except OSError:
-        print('no data file!')
+def clean(fpathArray=['web/js/data-rank.js','web/js/data-team.js']):
+    for fpath in fpathArray:
+        try:
+            os.remove(fpath)
+            print('data file cleaned.')
+        except OSError:
+            pass
 
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
@@ -47,12 +47,12 @@ if __name__ == '__main__':
         if len(sys.argv) == 2 or sys.argv[2] == 'all':
             clean()
             rl.saveAllRankingInfoToFile()
-            download_detail_from_rankfile('web/js/data.js')
+            download_detail_from_rankfile('web/js/data-rank.js')
         elif sys.argv[2] == 'rank':
             rl.saveAllRankingInfoToFile()
         elif sys.argv[2] == 'detail':
             # read ranklist
-            fpath = 'web/js/data.js'
+            fpath = 'web/js/data-rank.js'
             download_detail_from_rankfile(fpath)
         else:
             error('usage: download rank|detail|all')

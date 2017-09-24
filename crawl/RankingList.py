@@ -111,7 +111,7 @@ def combineAllRankingInfo(infoLists):
 
     return infos
 
-def saveAllRankingInfoToFile(fpath="web/js/data.js"):
+def saveAllRankingInfoToFile(fpath="web/js/data-rank.js"):
     infoLists = getAllRankingInfoList()
     infos = combineAllRankingInfo(infoLists)
     with open(fpath, 'a') as openfile:
@@ -120,7 +120,7 @@ def saveAllRankingInfoToFile(fpath="web/js/data.js"):
         openfile.write(';\ntd=[];\n')
     return infos
 
-def retrieveTeamCdFromFile(fpath="web/js/data.js"):
+def retrieveTeamCdFromFile(fpath="web/js/data-rank.js"):
     with open(fpath) as rfile:
         rline = rfile.readline()
         try:

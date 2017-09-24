@@ -21,7 +21,7 @@ def getRawJSON(teamCd):
     res = requests.post(url, data=getPostData(teamCd), headers=headers)
     return json.loads(res.text)
 
-def appendTeamDetailToFile(teamCd, fpath='web/js/data.js'):
+def appendTeamDetailToFile(teamCd, fpath='web/js/data-team.js'):
     raw = getRawJSON(teamCd)
     with open(fpath, 'a') as openfile:
         openfile.write('td["%s"]=' % teamCd)
@@ -29,7 +29,7 @@ def appendTeamDetailToFile(teamCd, fpath='web/js/data.js'):
         openfile.write(';\n')
     return raw
 
-def appendBatchTeamDetailToFile(teamCds, fpath='web/js/data.js'):
+def appendBatchTeamDetailToFile(teamCds, fpath='web/js/data-team.js'):
     result = []
     IDCount = 1
     for teamCd in teamCds:
