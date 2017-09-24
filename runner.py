@@ -8,8 +8,6 @@ def help():
               "\tdownload\t download and save team data.\n" + \
               "\t        \t RANGE: rank|detail|all .\n" +\
               "\tclean   \t clean all the old data.\n" + \
-              "\traw     \t raw test data from PGL site,\n" + \
-              "\t        \t TYPE: rpage|team  ARGs: page/teamCd.\n" +\
               "\t-? -h   \t this help."
     print(content)
     return
@@ -34,15 +32,6 @@ def clean(fpathArray=['web/js/data-rank.js','web/js/data-team.js']):
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
         help()
-    elif sys.argv[1] == 'raw':
-        if len(sys.argv) <= 3:
-            error('usage: raw rpage|team ARGs')
-        elif sys.argv[2] == 'rpage':
-            print(rl.getRawJSON(sys.argv[3]))
-        elif sys.argv[2] == 'team':
-            print(td.getRawJSON(sys.argv[3]))
-        else:
-            error('usage: raw rpage|team ARGs')
     elif sys.argv[1] == 'download':
         if len(sys.argv) == 2 or sys.argv[2] == 'all':
             clean()
